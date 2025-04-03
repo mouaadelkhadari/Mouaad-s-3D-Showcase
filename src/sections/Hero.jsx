@@ -7,6 +7,9 @@ import {useMediaQuery} from "react-responsive";
 import {calculateSizes} from "../constans/index.js";
 import Target from "../components/Target.jsx";
 import ReactLogo from "../components/ReactLogo.jsx";
+import Cube from "../components/Cube.jsx";
+import Rings from "../components/Rings.jsx";
+import HeroCamera from "../components/HeroCamera.jsx";
 
 const Hero = () => {
 
@@ -31,17 +34,20 @@ const Hero = () => {
                     <Suspense fallback={<CanvasLoader />}>
 
                     <PerspectiveCamera makeDefault position={[0, 0, 20]}/>
-                    <HackerRoom  // scale={0.07}
-                                 // position={[0, 0, 0]}
-                                 // rotation={[0, 280, 0]}
-                        position={sizes.deskPosition}
-                        rotation={[0, -Math.PI , 0]}
-                        scale={sizes.deskScale}
-                    />
+
+                        <HeroCamera isMobile={isMobile}>
+                            <HackerRoom
+                                position={sizes.deskPosition}
+                                rotation={[0, -Math.PI , 0]}
+                                scale={sizes.deskScale}
+                            />
+                        </HeroCamera>
 
                         <group>
                             <Target position={sizes.targetPosition}/>
                             <ReactLogo psoition={sizes.reactLogoPosition}/>
+                            <Cube position={sizes.cubePosition} />
+                            <Rings position={sizes.ringPosition} />
                         </group>
                         <ambientLight intensity={1} />
                         <directionalLight position={[0, 0, 0]} intensity={0.5} />
